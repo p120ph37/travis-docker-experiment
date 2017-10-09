@@ -1,12 +1,12 @@
-dist: trusty
-sudo: false
 language: c
-env:
-  - IT=docker # the word the Knights of Ni cannot hear...
 cache:
   directories:
   - $HOME/docker-cache
+before_install:
+  - docker load -i $HOME/docker-cache/image.tar || true # unpack cache, tolerate failure
+before_cache:
+  - docker save -o $HOME/docker-cache/image.tar "${TRAVIS_REPO_SLUG##*/}" $(docker history -q "${TRAVIS_REPO_SLUG##*/}") > image.tar # pack cache
 script:
-  - echo $IT is the word the Knights of Ni CANNOT hear!
-  - $IT build -t "${TRAVIS_REPO_SLUG##*/}" .
-  - $IT images
+  - docker build -t "${TRAVIS_REPO_SLUG##*/}" .
+  - docker images
+  - docker run --rm -t "${TRAVIS_REPO_SLUG##*/}" sh -c "ls /"
