@@ -1,5 +1,7 @@
+os: linux
 dist: trusty
 sudo: false
+language: c
 cache:
   directories:
   - $HOME/docker-cache
