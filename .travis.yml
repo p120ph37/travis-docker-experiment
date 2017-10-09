@@ -1,9 +1,10 @@
 dist: trusty
 sudo: false
 language: c
+env:
+  - IT=docker
 cache:
   directories:
   - $HOME/docker-cache
 script:
-  - echo dockr
-  - echo "hello"
+  - echo $IT is the word the Knights of Ni CANNOT hear!
