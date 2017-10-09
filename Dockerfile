@@ -1,3 +1,3 @@
 FROM centos:6.7
+RUN yum install -y git gcc rpm-build yum-utils
 WORKDIR /project/
-RUN yum install -y rpm-build yum-utils
