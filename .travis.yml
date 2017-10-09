@@ -2,9 +2,11 @@ dist: trusty
 sudo: false
 language: c
 env:
-  - IT=docker
+  - IT=docker # the word the Knights of Ni cannot hear...
 cache:
   directories:
   - $HOME/docker-cache
 script:
   - echo $IT is the word the Knights of Ni CANNOT hear!
+  - $IT build -t "${TRAVIS_REPO_SLUG##*/}" .
+  - $IT images
