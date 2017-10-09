@@ -3,13 +3,13 @@ cache:
   directories:
   - $HOME/docker-cache
 env:
-  - DOCKER_TAG=${TRAVIS_REPO_SLUG##*/}:${TRAVIS_BRANCH}-${TRAVIS_COMMIT}
+  - DOCKER_TAG=${TRAVIS_REPO_SLUG##*/}:$TRAVIS_BRANCH-$TRAVIS_COMMIT
 before_install:
   - docker load -i $HOME/docker-cache/image.tar || true # unpack cache, tolerate failure
   - docker images -a
 before_cache:
   - docker images -a
-  - docker save -o $HOME/docker-cache/image.tar $DOCKER_TAG} $(docker history -q $DOCKER_TAG | grep -v '<missing>') > image.tar # pack cache
+  - docker save -o $HOME/docker-cache/image.tar $DOCKER_TAG $(docker history -q $DOCKER_TAG | grep -v '<missing>') > image.tar # pack cache
 script:
   - docker build -t $DOCKER_TAG .
   - docker run --rm -t $DOCKER_TAG sh -c "ls /"
