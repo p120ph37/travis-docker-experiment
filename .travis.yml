@@ -1,4 +1,10 @@
+cache:
+  directories:
+  - $HOME/.docker-cache.tar
+before_cache:
+  - docker save -o $HOME/.docker-cache.tar # pack cache
 script:
+  - docker load -i $HOME/.docker-cache.tar.gz # unpack cache
   - docker build -t "${TRAVIS_REPO_SLUG##*/}" .
   - docker images
   - docker run --rm -t "${TRAVIS_REPO_SLUG##*/}" sh -c "ls /"
