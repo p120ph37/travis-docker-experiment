@@ -1,0 +1,6 @@
+script:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build -t "${TRAVIS_REPO_SLUG##*/}" .
+  - docker images
+  - docker tag "${TRAVIS_REPO_SLUG##*/}" "$DOCKER_USERNAME/${TRAVIS_REPO_SLUG##*/}"
+  - docker push "$DOCKER_USERNAME/${TRAVIS_REPO_SLUG##*/}"
