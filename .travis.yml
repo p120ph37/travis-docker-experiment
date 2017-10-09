@@ -5,5 +5,5 @@ cache:
   directories:
   - $HOME/docker-cache
 script:
-  - echo docker
+  - echo dockr
   - echo "hello"
