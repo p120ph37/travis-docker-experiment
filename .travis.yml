@@ -7,7 +7,7 @@ before_install:
 before_cache:
   - docker images -a
   - docker history -q "${TRAVIS_REPO_SLUG##*/}" | grep -v '<missing>'
-  - docker save -o $HOME/docker-cache/image.tar "${TRAVIS_REPO_SLUG##*/}" $(docker history -q "${TRAVIS_REPO_SLUG##*/}" | grep -v '<missing>') > image.tar # pack cache
+  - docker save -o $HOME/docker-cache/image.tar "${TRAVIS_REPO_SLUG##*/}" > image.tar # pack cache
 script:
   - docker build -t "${TRAVIS_REPO_SLUG##*/}" .
   - docker images
